@@ -17,19 +17,19 @@ Open http://localhost:3000. Production checks: `pnpm typecheck`, `pnpm build`, t
 
 ## Editing content
 
-Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. All unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
+Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
 
-- Replace each release title, detail, artwork and URL with approved information. Put artwork in `public/` and use its `/filename` path. Supply square artwork optimized for the web.
+- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. The Apple Music URL is an artist profile, not a guessed release destination.
 - Replace the null biography with approved copy. Newlines are preserved.
 - Set the verified professional email and add verified social objects to `socials`.
 - Add more platforms only after verification.
-- Abstract CSS artwork is placeholder art, not an actual release cover. No phoenix bird imagery, external images, autoplay, database, tracking or backend is used.
+- The supplied JPEG covers in `public/artwork/` are preserved byte-for-byte and displayed with `object-fit: contain`, without overlays, filters or cropping. Rich and Famous intentionally retains its longer legacy phrase in the artwork; its official interface and structured-data title is Rich and Famous. Keep the original cover files unchanged. No autoplay, database, tracking or backend is used.
 
 Reusable elements live in `components/ui.tsx`; page composition in `app/page.tsx`; design tokens, responsive layouts and reduced-motion rules in `app/globals.css`.
 
 ## SEO
 
-Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. Social account metadata is intentionally omitted until verified.
+Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. MusicGroup JSON-LD identifies Phenix Rhyder as an independent recording artist and songwriter, links the verified Apple Music profile, and connects both releases to Phenix Records. No release dates, tracks or personal details are inferred.
 
 ## Vercel deployment — manual, after review
 
