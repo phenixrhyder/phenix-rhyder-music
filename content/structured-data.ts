@@ -14,7 +14,7 @@ export const artistStructuredData = {
       url: site.url,
       description: site.description,
       genre: ['Ambient', 'Lo-fi', 'Experimental', 'Alternative', 'Indie', 'Electronic'],
-      sameAs: site.platforms.flatMap(platform => platform.url ? [platform.url] : []),
+      sameAs: [...new Set([...site.platforms.flatMap(platform => platform.url ? [platform.url] : []), ...site.socials.map(social => social.url)])],
       album: site.releases.map(release => ({ '@id': `${site.url}/#${release.slug}` })),
     },
     { '@type': 'Organization', '@id': labelId, name: 'Phenix Records' },
