@@ -97,3 +97,15 @@ pnpm test:streaming
 For another port, use `STREAMING_TEST_URL=http://localhost:3100 pnpm test:streaming`. The four Node.js tests validate both exact artist profiles in HTML and MusicGroup JSON-LD, all three approved release identities/types and catalog URLs, collapsed cover controls with valid ARIA targets and no initial iframe, and served original JPEGs. They use no additional dependencies. Browser interaction checks remain separate because cross-origin provider players require a browser.
 
 Fresh verification on November 1, 2026 confirmed all three Spotify release titles/types and artist URI directly from the artist catalog/release pages, and confirmed Spotify's official oEmbed responses. Browser checks on this latest-main branch rendered all three releases in both Apple Music and Spotify, switched services using click/keyboard controls, confirmed one active iframe, tested Escape/focus restoration, and found no overflow at 390px. Build, TypeScript and all four smoke tests passed. No audio was started during testing; signed-in playback and physical iPhone Safari remain untested. No release URL is missing.
+
+## Multi-page website
+
+Public routes: `/` (Home), `/music`, `/projects`, `/projects/prism`, `/about`, `/contact`. Header/footer route navigation is shared in the root layout. The mobile disclosure supports keyboard activation, Escape and automatic close after selecting a route. Route metadata is built by `content/metadata.ts`; the sitemap lists all six public pages. Artist JSON-LD remains shared with all verified profile references.
+
+Home contains brief previews only. Music retains the original player component and all three verified releases. About retains the approved biography verbatim and Phenix Records branding. Contact retains the public email and official YouTube/X links.
+
+Prism is an external project showcase, with the supplied description and exact live Space/creator URLs in `content/projects.ts`. Its CreativeWork data asserts only the supplied creator and description. The typographic color treatment is decorative, not a product screenshot. Empty `media` and `updates` arrays are extension points: only add approved screenshots, demonstrations, descriptions or development updates; empty collections render no placeholder sections. The site does not embed, copy, host, build or deploy Prism. Its repository and hosting remain separate.
+
+Run `pnpm build`, `pnpm typecheck`, then `pnpm start`. Run `pnpm test:streaming` against the production server (or set `STREAMING_TEST_URL` for another port). The six tests now cover Music/Contact profile links, release identities, absent initial players, artwork responses, all public routes with unique SEO and self-canonicals, sitemap coverage and the external Prism showcase. Browser checks covered desktop/mobile navigation, direct refresh, history back/forward, service switching, Escape/focus restoration and 390px sizing. Physical iPhone Safari and authenticated full playback were not tested.
+
+Vercel setup and both domain redirects remain unchanged. Preview this PR before approving any production deployment.
