@@ -88,3 +88,41 @@ test('Prism is a linked showcase, not an embedded application', async () => {
   const data = [...prism.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(match => JSON.parse(match[1]));
   assert.ok(data.some(item => item['@type'] === 'CreativeWork' && item.name === 'PRISM'));
 });
+
+test('one stable artist identity connects Home, About and Prism', async () => {
+  const artistId = 'https://phenixrhyder.com/#artist';
+  const hf = 'https://huggingface.co/phenixrhyder';
+  for (const path of ['/', '/about', '/projects/prism']) {
+    const page = await (await fetch(new URL(path, base))).text();
+    const blocks = [...page.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(match => JSON.parse(match[1]));
+    const nodes = blocks.flatMap(block => block['@graph'] ?? [block]);
+    const artists = nodes.filter(node => node['@type'] === 'MusicGroup');
+    assert.equal(artists.length, 1, path);
+    assert.equal(artists[0]['@id'], artistId);
+    assert.equal(artists[0].name, 'Phenix Rhyder');
+    assert.match(artists[0].description, /independent recording artist and songwriter/);
+    assert.equal(artists[0].mainEntityOfPage, 'https://phenixrhyder.com/about');
+    assert.ok(artists[0].sameAs.includes(hf));
+    assert.equal(artists[0].sameAs.length, 7);
+    assert.equal(new Set(artists[0].sameAs).size, 7);
+    assert.equal(nodes.filter(node => node['@type'] === 'Person').length, 0);
+    if (path === '/projects/prism') {
+      const project = nodes.find(node => node['@type'] === 'CreativeWork');
+      assert.equal(project.creator['@id'], artistId);
+      assert.equal(project['@id'], 'https://phenixrhyder.com/projects/prism#project');
+    }
+  }
+});
+
+test('public discovery metadata stays crawlable and uses canonical Open Graph identities', async () => {
+  const robots = await (await fetch(new URL('/robots.txt', base))).text();
+  assert.match(robots, /Allow: \//);
+  assert.ok(robots.includes('https://phenixrhyder.com/sitemap.xml'));
+  for (const path of ['/', '/music', '/projects', '/projects/prism', '/about', '/contact']) {
+    const page = await (await fetch(new URL(path, base))).text();
+    assert.doesNotMatch(page, /<meta[^>]+content="[^"]*noindex/i);
+    const og = page.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+    const canonical = page.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    assert.equal(og, canonical);
+  }
+});

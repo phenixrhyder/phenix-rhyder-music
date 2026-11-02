@@ -4,7 +4,7 @@ import { site } from '@/content/site';
 import { Arrow, SectionLabel, VerifiedLink, SocialLink } from '@/components/ui';
 import { pageMetadata } from '@/content/metadata';
 import { ProjectCard } from '@/components/project-card';
-export const metadata = pageMetadata('Phenix Rhyder — Independent Recording Artist & Songwriter', 'The official home of Phenix Rhyder. Explore independent music, creative projects including Prism, the artist biography, and professional contact.', '/');
+export const metadata = pageMetadata('Phenix Rhyder — Independent Recording Artist & Songwriter', 'Official website of Phenix Rhyder, independent recording artist and songwriter. Explore music, creative projects including Prism, and official artist profiles.', '/');
 export default function Home(){return <>      <section className="hero" aria-labelledby="hero-title">
         <div className="aurora" aria-hidden="true"><div className="orb" /><div className="light-line" /></div>
         <div className="shell hero-content"><p className="eyebrow"><span className="tiny-dot" /> THE OFFICIAL ARTIST WEBSITE</p><h1 id="hero-title">PHENIX<br /><span>RHYDER</span><span className="title-period">.</span></h1><div className="hero-bottom"><div><p className="hero-description">Sound beyond the familiar.</p><p className="muted genre-line">Ambient · Lo-fi · Experimental · Alternative · Indie · Electronic</p></div><a className="button" href="/music">Listen to music <Arrow /></a></div></div>

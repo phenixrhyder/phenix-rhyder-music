@@ -6,6 +6,8 @@ export const spotifyArtistUrl = 'https://open.spotify.com/artist/7dIKBTLHelRJ6cm
 export const site = {
   name: 'Phenix Rhyder',
   url: 'https://phenixrhyder.com',
+  // Artist-confirmed identity profiles that are not streaming destinations.
+  identityProfiles: ['https://huggingface.co/phenixrhyder'],
   description: "Phenix Rhyder is an independent recording artist and songwriter exploring ambient, lo-fi, alternative, indie, and electronic music. Released through Phenix Records, the music moves between atmospheric soundscapes, expressive melodies, and experimental sonic textures.",
   metaDescription: "Phenix Rhyder is an independent recording artist and songwriter exploring ambient, lo-fi, alternative, indie, and electronic music.",
   aboutHeading: "About Phenix Rhyder",

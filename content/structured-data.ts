@@ -1,6 +1,6 @@
 import { site } from './site';
 
-const artistId = `${site.url}/#artist`;
+export const artistId = `${site.url}/#artist`;
 const labelId = `${site.url}/#phenix-records`;
 
 // Include only supplied releases and verified profiles. No inferred dates, tracks or personal details.
@@ -13,8 +13,9 @@ export const artistStructuredData = {
       name: site.name,
       url: site.url,
       description: site.description,
+      mainEntityOfPage: `${site.url}/about`,
       genre: ['Ambient', 'Lo-fi', 'Experimental', 'Alternative', 'Indie', 'Electronic'],
-      sameAs: [...new Set([...site.platforms.flatMap(platform => platform.url ? [platform.url] : []), ...site.socials.map(social => social.url)])],
+      sameAs: [...new Set([...site.platforms.flatMap(platform => platform.url ? [platform.url] : []), ...site.socials.map(social => social.url), ...site.identityProfiles])],
       album: site.releases.map(release => ({ '@id': `${site.url}/#${release.slug}` })),
     },
     { '@type': 'Organization', '@id': labelId, name: 'Phenix Records' },
