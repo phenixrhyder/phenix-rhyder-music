@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 // Run against a built, running site: STREAMING_TEST_URL=http://localhost:3100 pnpm test:streaming
 const base = process.env.STREAMING_TEST_URL ?? 'http://localhost:3000';
 const appleArtist = 'https://music.apple.com/us/artist/phenix-rhyder/1795964759';
+const xProfile = 'https://x.com/phenix_rhyder';
 const youtubeChannel = 'https://www.youtube.com/channel/UCBnLNK0lWirXcviF3whqUbg';
 const amazonArtist = 'https://www.amazon.com/music/player/artists/B0DT9SYJK1/phenix-rhyder';
 const iheartArtist = 'https://www.iheart.com/artist/phenix-rhyder-45741687/';
@@ -15,7 +16,8 @@ const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<
 
 test('all official artist profiles are published in navigation and MusicGroup', () => {
   const artist = graph.find(item => item['@type'] === 'MusicGroup');
-  for (const url of [appleArtist, spotifyArtist, youtubeChannel, iheartArtist, amazonArtist]) {
+  assert.equal(artist.sameAs.length, new Set(artist.sameAs).size, 'Artist profiles must not be duplicated');
+  for (const url of [appleArtist, spotifyArtist, youtubeChannel, iheartArtist, amazonArtist, xProfile]) {
     assert.ok(artist.sameAs.includes(url));
     assert.ok(html.includes(`href="${url}"`));
   }

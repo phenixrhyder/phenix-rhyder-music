@@ -1,7 +1,7 @@
 import { ReleaseGrid } from '@/components/release-grid';
 import { artistStructuredData } from '@/content/structured-data';
 import { site } from '@/content/site';
-import { Arrow, SectionLabel, VerifiedLink } from '@/components/ui';
+import { Arrow, SectionLabel, VerifiedLink, SocialLink } from '@/components/ui';
 const nav = [['Music', '#music'], ['About', '#about'], ['Contact', '#contact']];
 export default function Home() {
   return <>
@@ -20,7 +20,7 @@ export default function Home() {
         <div className="about-copy approved-biography">{site.biography.split('\n\n').map((paragraph, index) => <p className={index === 0 ? 'intro' : 'muted bio'} key={paragraph}>{paragraph}</p>)}<div className="genre-tags">{['Ambient', 'Lo-fi', 'Experimental', 'Alternative', 'Indie', 'Electronic'].map(genre => <span key={genre}>{genre}</span>)}</div></div>
       </section>
       <section id="label" className="label-section shell"><p className="eyebrow">THE LABEL</p><div className="label-wordmark">PHENIX<span>RECORDS</span><span className="label-symbol" aria-hidden="true">◎</span></div><p className="muted">Independent artist. Independent label.</p></section>
-      <section id="contact" className="shell section contact-grid" aria-labelledby="contact-title"><div><SectionLabel number="04">GET IN TOUCH</SectionLabel><h2 id="contact-title">Let’s make<br /><span className="serif">something resonate.</span></h2></div><div className="contact-copy"><p className="eyebrow">PROFESSIONAL INQUIRIES</p><p className="muted contact-description">For music inquiries, collaborations, licensing, and general correspondence, get in touch.</p><a className="contact-email" href={`mailto:${site.email}`}>{site.email} <Arrow /></a><a className="button contact-action" href={`mailto:${site.email}`}>Email Phenix Rhyder <Arrow /></a><div className="socials"><p className="eyebrow">FOLLOW PHENIX RHYDER</p>{site.socials.length ? site.socials.map(social => <VerifiedLink key={social.name} url={social.url}>{social.name}</VerifiedLink>) : <p className="muted small">Social links pending verification.</p>}</div></div></section>
+      <section id="contact" className="shell section contact-grid" aria-labelledby="contact-title"><div><SectionLabel number="04">GET IN TOUCH</SectionLabel><h2 id="contact-title">Let’s make<br /><span className="serif">something resonate.</span></h2></div><div className="contact-copy"><p className="eyebrow">PROFESSIONAL INQUIRIES</p><p className="muted contact-description">For music inquiries, collaborations, licensing, and general correspondence, get in touch.</p><a className="contact-email" href={`mailto:${site.email}`}>{site.email} <Arrow /></a><a className="button contact-action" href={`mailto:${site.email}`}>Email Phenix Rhyder <Arrow /></a><div className="socials"><p className="eyebrow">FOLLOW PHENIX RHYDER</p><div className="social-links">{site.socials.map(social => <SocialLink key={social.name} name={social.name} url={social.url} />)}</div></div></div></section>
     </main>
     <footer className="shell footer"><div><a className="footer-brand" href="#">PHENIX RHYDER<span className="brand-dot" /></a><p className="small muted">© {new Date().getFullYear()} Phenix Rhyder. All rights reserved.</p></div><nav aria-label="Footer navigation" className="flex gap-6">{nav.map(([label, href]) => <a href={href} key={label}>{label}</a>)}</nav><a href="#label" className="footer-label">PHENIX RECORDS <Arrow /></a></footer>
   </>;
