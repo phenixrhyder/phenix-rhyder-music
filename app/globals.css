@@ -26,3 +26,5 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
 .provider-tabs button[aria-selected=true]{color:var(--ink);border-color:var(--accent);background:#bbadff12}
 [role=tabpanel]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .spotify-player{display:block;width:100%;border:0;border-radius:12px;margin:14px 0}
+
+.about-subheading{font-size:12px;line-height:1.9;color:var(--accent);margin-top:22px;max-width:340px}.approved-biography .bio{margin-top:24px;line-height:1.95}.approved-biography .intro{margin-top:0}
