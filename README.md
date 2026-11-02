@@ -17,7 +17,7 @@ Open http://localhost:3000. Production checks: `pnpm typecheck`, `pnpm build`, t
 
 ## Editing content
 
-Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), Lost in Ohio (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
+Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), Lost in Ohio (single), and the Apple Music and Spotify artist profiles are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
 
 - Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Each cover toggles an inline official Apple Music listening panel. The separate release text link opens its verified individual release page in a new tab. The streaming section retains the verified artist profile. Unavailable embeds retain an artist-profile fallback; no release IDs are inferred.
 - Replace the null biography with approved copy. Newlines are preserved.
@@ -29,7 +29,7 @@ Reusable elements live in `components/ui.tsx`; page composition in `app/page.tsx
 
 ## SEO
 
-Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. MusicGroup JSON-LD identifies Phenix Rhyder as an independent recording artist and songwriter, links the verified Apple Music profile, and connects all three releases to Phenix Records. No release dates, tracks or personal details are inferred.
+Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. MusicGroup JSON-LD identifies Phenix Rhyder as an independent recording artist and songwriter, links the verified Apple Music and Spotify profiles, and connects all three releases to Phenix Records. No release dates, tracks or personal details are inferred.
 
 ## Vercel deployment — manual, after review
 
@@ -66,6 +66,20 @@ Cover controls are native buttons with release-specific labels, aria-expanded/ar
 
 Apple iframe URLs and permissions/sandbox attributes come from Apple's official generator at https://js-cdn.music.apple.com/musickit/v1/generate.js, documented at https://js-cdn.music.apple.com/musickit/v1/index.html. The generator ran only during development; no extra generator script is shipped. Preview/full-playback conditions follow https://artists.apple.com/support/1117-apple-music-marketing-tools. The iframe is not a custom streaming implementation.
 
-Each panel states that previews and full playback depend on provider access, sign-in, subscription and region. A verified artist-profile fallback is always visible because cross-origin error pages and browser blocking cannot be reliably detected by iframe load events. A detected iframe error or missing embed URL displays an unavailable message. Spotify tabs are omitted because no verified Spotify release URLs have been supplied; do not add guessed profiles or embeds.
+Each panel states that previews and full playback depend on provider access, sign-in, subscription and region. A verified artist-profile fallback is always visible because cross-origin error pages and browser blocking cannot be reliably detected by iframe load events. A detected iframe error or missing embed URL displays an unavailable message. Spotify tabs appear only where both the individual release URL and official embed URL have been verified. Provider changes unmount the previous iframe. Tabs support Left/Right, Home/End, roving tab focus and labelled panels. Apple Music is the default every time a release is opened.
 
 Validation: production build and TypeScript passed. In-browser checks confirmed all three embedded title/artist identities and track listings, initial iframe count zero, one iframe when open, switching removes the prior player, Enter/Space activation, Escape close/focus restoration, and no horizontal overflow at 390px. Physical iPhone Safari and signed-in subscription playback were not tested. Test those on a real device before launch; no access tokens or credentials are required by this website.
+
+## Verified Spotify catalog and embeds
+
+Artist: https://open.spotify.com/artist/7dIKBTLHelRJ6cmnHBCdf4
+
+Verified November 1, 2026 by following the supplied artist catalog to each release page and checking title, release type and artist URI against `spotify:artist:7dIKBTLHelRJ6cmnHBCdf4`:
+
+- October — Album: https://open.spotify.com/album/6aYkN40S5iNvoYolMlYO3e
+- Rich and Famous — Single: https://open.spotify.com/album/2hS5J8ZFhHsh2JIl8pgAWC
+- Lost in Ohio — Single: https://open.spotify.com/album/5nqKoSnr9lRUw4sFc5pFUV
+
+All three returned HTTP 200. Official iframe code and embed URLs were retrieved from Spotify's public oEmbed endpoint for each verified URL, following https://developer.spotify.com/documentation/embeds/tutorials/creating-an-embed. There are no API keys, inferred IDs or autoplay parameters. Permissions in the official iframe code do not request playback; no playback command runs on load or tab selection.
+
+Spotify browser validation: all three embedded players displayed the correct title and Phenix Rhyder artist name. Apple Music remained the initial selection; ArrowRight and Home switched providers with the selected tab focused. Exactly one iframe was mounted, none existed on initial load, and the Spotify player fit at 390px without horizontal overflow. Production build, TypeScript and production-HTML structured-data checks passed. Audio output, authenticated subscription playback and physical iPhone Safari remain untested.

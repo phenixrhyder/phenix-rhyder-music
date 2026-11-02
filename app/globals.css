@@ -20,3 +20,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
 .player-fallback{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .listening-hint{margin-top:8px;font-size:10px}
 @media(max-width:600px){.listening-panel{padding:18px 10px}.close-player{min-height:44px;min-width:44px}}
+
+.provider-tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.provider-tabs button{font:inherit;font-size:11px;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:5px;color:var(--muted);cursor:pointer}
+.provider-tabs button[aria-selected=true]{color:var(--ink);border-color:var(--accent);background:#bbadff12}
+[role=tabpanel]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.spotify-player{display:block;width:100%;border:0;border-radius:12px;margin:14px 0}
