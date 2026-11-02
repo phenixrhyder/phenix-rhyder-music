@@ -17,9 +17,9 @@ Open http://localhost:3000. Production checks: `pnpm typecheck`, `pnpm build`, t
 
 ## Editing content
 
-Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
+Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), Lost in Ohio (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
 
-- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. The Apple Music URL is an artist profile, not a guessed release destination.
+- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Until individual release URLs are supplied, each release card explicitly links to the verified Apple Music artist profile. The Apple Music URL is an artist profile, not a guessed release destination.
 - Replace the null biography with approved copy. Newlines are preserved.
 - Set the verified professional email and add verified social objects to `socials`.
 - Add more platforms only after verification.
@@ -29,7 +29,7 @@ Reusable elements live in `components/ui.tsx`; page composition in `app/page.tsx
 
 ## SEO
 
-Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. MusicGroup JSON-LD identifies Phenix Rhyder as an independent recording artist and songwriter, links the verified Apple Music profile, and connects both releases to Phenix Records. No release dates, tracks or personal details are inferred.
+Canonical URL is https://phenixrhyder.com. Metadata includes Open Graph and Twitter large cards; `/opengraph-image` generates a 1200×630 PNG without external assets. `/sitemap.xml`, `/robots.txt`, and `/icon.svg` are included. MusicGroup JSON-LD identifies Phenix Rhyder as an independent recording artist and songwriter, links the verified Apple Music profile, and connects all three releases to Phenix Records. No release dates, tracks or personal details are inferred.
 
 ## Vercel deployment — manual, after review
 
@@ -47,3 +47,5 @@ No production deployment has been performed by this implementation.
 Once connected to Vercel, future merges to the configured production branch can trigger automatic production deployments. Configure that workflow deliberately before pushing future changes.
 
 Vercel reference: https://vercel.com/docs/domains/working-with-domains/deploying-and-redirecting
+
+The release grid uses three columns above 900px, two from 601–900px, and one at 600px and below. All covers remain original, uncropped and unobscured.
