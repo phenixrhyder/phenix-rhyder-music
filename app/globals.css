@@ -3,3 +3,20 @@
 
 /* Original covers remain uncropped, unobscured and unfiltered. */
 .original-cover{display:flex;align-items:center;justify-content:center;background:#0e0e16}.original-cover img{display:block;width:100%;height:100%;object-fit:contain}
+
+.cover-link{cursor:pointer;transition:box-shadow .2s ease}
+.cover-link:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+@media(hover:hover) and (pointer:fine){.cover-link:hover{box-shadow:0 0 0 2px #bbadff80,0 6px 22px #7661b52b}}
+
+/* Listening is user-initiated; no player exists until a cover is activated. */
+.cover-toggle{width:100%;padding:0;border:0;color:inherit;font:inherit;text-align:inherit}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+.release{min-width:0;align-self:start}
+.listening-panel{margin-top:22px;padding:18px 12px;border:1px solid var(--line);background:#101019;min-width:0;border-radius:8px}
+.player-heading{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:12px}
+.player-heading h4{font-size:13px;line-height:1.6;font-weight:400;margin:0}
+.close-player{cursor:pointer;flex-shrink:0;color:var(--accent);font-size:11px;padding:4px;min-height:32px}
+.apple-player{display:block;width:100%;max-width:660px;overflow:hidden;background:transparent;border:0;margin:14px 0}
+.player-fallback{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.listening-hint{margin-top:8px;font-size:10px}
+@media(max-width:600px){.listening-panel{padding:18px 10px}.close-player{min-height:44px;min-width:44px}}
