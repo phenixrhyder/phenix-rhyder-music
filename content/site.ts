@@ -14,6 +14,7 @@ export const site = {
     { name: 'Spotify', url: spotifyArtistUrl as string | null, mark: '02' },
     { name: 'YouTube', url: 'https://www.youtube.com/channel/UCBnLNK0lWirXcviF3whqUbg' as string | null, mark: '03' },
     { name: 'iHeartRadio', url: 'https://www.iheart.com/artist/phenix-rhyder-45741687/' as string | null, mark: '04' },
+    { name: 'Amazon Music', url: 'https://www.amazon.com/music/player/artists/B0DT9SYJK1/phenix-rhyder' as string | null, mark: '05' },
   ],
   releases: [
     { title: 'October', type: 'Album', artwork: '/artwork/october.jpg', width: 1179, height: 1175, url: 'https://music.apple.com/us/album/october/1844034019' as string | null, slug: 'october', spotifyUrl: 'https://open.spotify.com/album/6aYkN40S5iNvoYolMlYO3e', spotifyEmbedUrl: 'https://open.spotify.com/embed/album/6aYkN40S5iNvoYolMlYO3e?utm_source=oembed', appleEmbedUrl: 'https://embed.music.apple.com/us/album/october/1844034019' },
