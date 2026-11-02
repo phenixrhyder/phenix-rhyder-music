@@ -22,7 +22,7 @@ export const artistStructuredData = {
       '@type': 'MusicAlbum',
       '@id': `${site.url}/#${release.slug}`,
       name: release.title,
-      ...(release.url ? { sameAs: release.url } : {}),
+      sameAs: [release.url, release.spotifyUrl].filter(Boolean),
       albumReleaseType: `https://schema.org/${release.type === 'Single' ? 'SingleRelease' : 'AlbumRelease'}`,
       byArtist: { '@id': artistId },
       recordLabel: { '@id': labelId },
