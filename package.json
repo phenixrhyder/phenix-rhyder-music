@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:streaming": "node --test tests/streaming.test.mjs"
   },
   "engines": {
     "node": ">=22"

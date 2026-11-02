@@ -83,3 +83,17 @@ Verified November 1, 2026 by following the supplied artist catalog to each relea
 All three returned HTTP 200. Official iframe code and embed URLs were retrieved from Spotify's public oEmbed endpoint for each verified URL, following https://developer.spotify.com/documentation/embeds/tutorials/creating-an-embed. There are no API keys, inferred IDs or autoplay parameters. Permissions in the official iframe code do not request playback; no playback command runs on load or tab selection.
 
 Spotify browser validation: all three embedded players displayed the correct title and Phenix Rhyder artist name. Apple Music remained the initial selection; ArrowRight and Home switched providers with the selected tab focused. Exactly one iframe was mounted, none existed on initial load, and the Spotify player fit at 390px without horizontal overflow. Production build, TypeScript and production-HTML structured-data checks passed. Audio output, authenticated subscription playback and physical iPhone Safari remain untested.
+
+## Repeatable production smoke checks
+
+Spotify support is already included in `main` through merged PR #6, preserving the Apple Music implementation from PR #5. The follow-up verification branch starts from commit `9c8fa49` and changes only tests, the test command and these notes.
+
+After `pnpm build`, start the production server with `pnpm start` in one terminal. In another run:
+
+```sh
+pnpm test:streaming
+```
+
+For another port, use `STREAMING_TEST_URL=http://localhost:3100 pnpm test:streaming`. The four Node.js tests validate both exact artist profiles in HTML and MusicGroup JSON-LD, all three approved release identities/types and catalog URLs, collapsed cover controls with valid ARIA targets and no initial iframe, and served original JPEGs. They use no additional dependencies. Browser interaction checks remain separate because cross-origin provider players require a browser.
+
+Fresh verification on November 1, 2026 confirmed all three Spotify release titles/types and artist URI directly from the artist catalog/release pages, and confirmed Spotify's official oEmbed responses. Browser checks on this latest-main branch rendered all three releases in both Apple Music and Spotify, switched services using click/keyboard controls, confirmed one active iframe, tested Escape/focus restoration, and found no overflow at 390px. Build, TypeScript and all four smoke tests passed. No audio was started during testing; signed-in playback and physical iPhone Safari remain untested. No release URL is missing.
