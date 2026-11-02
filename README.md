@@ -19,7 +19,7 @@ Open http://localhost:3000. Production checks: `pnpm typecheck`, `pnpm build`, t
 
 Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), Lost in Ohio (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
 
-- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Each cover and release text link opens its verified individual Apple Music release page in a new tab. The streaming section retains the verified artist profile. Null release URLs leave artwork unlinked and use the artist-profile fallback for the text link.
+- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Each cover toggles an inline official Apple Music listening panel. The separate release text link opens its verified individual release page in a new tab. The streaming section retains the verified artist profile. Unavailable embeds retain an artist-profile fallback; no release IDs are inferred.
 - Replace the null biography with approved copy. Newlines are preserved.
 - Set the verified professional email and add verified social objects to `socials`.
 - Add more platforms only after verification.
@@ -58,4 +58,14 @@ Located through the verified Apple Music artist profile and checked on November 
 - Rich and Famous — Single: https://music.apple.com/us/album/rich-and-famous-single/6828209227
 - Lost in Ohio — Single: https://music.apple.com/us/album/lost-in-ohio-single/1833474700
 
-Cover links are native keyboard-accessible anchors with release-specific labels, new-tab announcements, visible focus rings and a desktop hover shadow. The effect adds no image overlay, filter, transform or crop; reduced-motion preferences disable transitions.
+Cover controls are native buttons with release-specific labels, aria-expanded/aria-controls, visible focus rings and a desktop hover shadow. The effect adds no image overlay, filter, transform or crop; reduced-motion preferences disable transitions.
+
+## Embedded listening panels
+
+`components/release-grid.tsx` manages one open release. Covers toggle panels without navigation. Closing or switching releases unmounts the iframe (and stops its playback); Escape from panel controls closes it and restores focus to its cover. Escape inside a cross-origin player remains controlled by the provider. Enter/Space and touch use native button behavior. No iframe is rendered until activation, and `loading="lazy"` defers offscreen loading. No autoplay parameter or playback command is used.
+
+Apple iframe URLs and permissions/sandbox attributes come from Apple's official generator at https://js-cdn.music.apple.com/musickit/v1/generate.js, documented at https://js-cdn.music.apple.com/musickit/v1/index.html. The generator ran only during development; no extra generator script is shipped. Preview/full-playback conditions follow https://artists.apple.com/support/1117-apple-music-marketing-tools. The iframe is not a custom streaming implementation.
+
+Each panel states that previews and full playback depend on provider access, sign-in, subscription and region. A verified artist-profile fallback is always visible because cross-origin error pages and browser blocking cannot be reliably detected by iframe load events. A detected iframe error or missing embed URL displays an unavailable message. Spotify tabs are omitted because no verified Spotify release URLs have been supplied; do not add guessed profiles or embeds.
+
+Validation: production build and TypeScript passed. In-browser checks confirmed all three embedded title/artist identities and track listings, initial iframe count zero, one iframe when open, switching removes the prior player, Enter/Space activation, Escape close/focus restoration, and no horizontal overflow at 390px. Physical iPhone Safari and signed-in subscription playback were not tested. Test those on a real device before launch; no access tokens or credentials are required by this website.
