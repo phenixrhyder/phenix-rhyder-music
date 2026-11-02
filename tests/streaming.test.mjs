@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 const base = process.env.STREAMING_TEST_URL ?? 'http://localhost:3000';
 const appleArtist = 'https://music.apple.com/us/artist/phenix-rhyder/1795964759';
 const youtubeChannel = 'https://www.youtube.com/channel/UCBnLNK0lWirXcviF3whqUbg';
+const iheartArtist = 'https://www.iheart.com/artist/phenix-rhyder-45741687/';
 const spotifyArtist = 'https://open.spotify.com/artist/7dIKBTLHelRJ6cmnHBCdf4';
 const response = await fetch(base);
 assert.equal(response.status, 200, 'Production homepage must load');
@@ -13,7 +14,7 @@ const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<
 
 test('all official artist profiles are published in navigation and MusicGroup', () => {
   const artist = graph.find(item => item['@type'] === 'MusicGroup');
-  for (const url of [appleArtist, spotifyArtist, youtubeChannel]) {
+  for (const url of [appleArtist, spotifyArtist, youtubeChannel, iheartArtist]) {
     assert.ok(artist.sameAs.includes(url));
     assert.ok(html.includes(`href="${url}"`));
   }
