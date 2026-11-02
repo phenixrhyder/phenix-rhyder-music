@@ -11,7 +11,7 @@ export const site = {
   aboutHeading: "About Phenix Rhyder",
   aboutSubheading: "Independent Recording Artist • Songwriter • Sonic Explorer",
   biography: "Phenix Rhyder is an independent recording artist and songwriter exploring the space between atmosphere, melody, and experimentation.\n\nMoving across ambient, lo-fi, alternative, indie, and electronic music, Phenix approaches each release as its own sonic environment. Some compositions unfold through spacious textures and subtle movement, while others embrace expressive melodies, layered instrumentation, and the raw energy of alternative sound.\n\nRather than remaining within a single genre, Phenix Rhyder’s music follows curiosity—exploring how rhythm, texture, harmony, and space can shape an emotional experience. From intimate, reflective soundscapes to more energetic and unconventional arrangements, the music is united by a fascination with sound itself.\n\nReleasing music under Phenix Records, Phenix Rhyder continues to develop a catalog shaped by creative exploration, sonic contrast, and the freedom to move beyond familiar musical boundaries.",
-  email: null as string | null,
+  email: 'contact@phenixrhyder.com',
   platforms: [
     { name: 'Apple Music', url: appleMusicArtistUrl as string | null, mark: '01' },
     { name: 'Spotify', url: spotifyArtistUrl as string | null, mark: '02' },
