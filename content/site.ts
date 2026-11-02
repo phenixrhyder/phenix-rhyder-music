@@ -13,10 +13,10 @@ export const site = {
     { name: 'YouTube', url: null as string | null, mark: '03' },
   ],
   releases: [
-    { title: 'October', type: 'Album', artwork: '/artwork/october.jpg', width: 1179, height: 1175, url: null as string | null, slug: 'october' },
+    { title: 'October', type: 'Album', artwork: '/artwork/october.jpg', width: 1179, height: 1175, url: 'https://music.apple.com/us/album/october/1844034019' as string | null, slug: 'october' },
     // The original artwork intentionally uses a longer legacy phrase. Keep the official title below.
-    { title: 'Rich and Famous', type: 'Single', artwork: '/artwork/rich-and-famous.jpg', width: 1254, height: 1254, url: null as string | null, slug: 'rich-and-famous' },
-    { title: 'Lost in Ohio', type: 'Single', artwork: '/artwork/lost-in-ohio.jpg', width: 1080, height: 1080, url: null as string | null, slug: 'lost-in-ohio' },
+    { title: 'Rich and Famous', type: 'Single', artwork: '/artwork/rich-and-famous.jpg', width: 1254, height: 1254, url: 'https://music.apple.com/us/album/rich-and-famous-single/6828209227' as string | null, slug: 'rich-and-famous' },
+    { title: 'Lost in Ohio', type: 'Single', artwork: '/artwork/lost-in-ohio.jpg', width: 1080, height: 1080, url: 'https://music.apple.com/us/album/lost-in-ohio-single/1833474700' as string | null, slug: 'lost-in-ohio' },
   ],
   socials: [] as { name: string; url: string }[],
 };

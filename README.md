@@ -19,7 +19,7 @@ Open http://localhost:3000. Production checks: `pnpm typecheck`, `pnpm build`, t
 
 Edit `content/site.ts` for releases, platform URLs, biography, professional email, and social accounts. October (album), Rich and Famous (single), Lost in Ohio (single), and the Apple Music artist profile are supplied and verified by the artist. Remaining unprovided information is explicitly labeled as a placeholder; null URLs render as noninteractive pending text. Do not add guessed accounts or releases.
 
-- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Until individual release URLs are supplied, each release card explicitly links to the verified Apple Music artist profile. The Apple Music URL is an artist profile, not a guessed release destination.
+- Release titles, types and original cover paths live in `site.releases`. Keep exactly the approved releases; add direct release URLs only when verified. Each cover and release text link opens its verified individual Apple Music release page in a new tab. The streaming section retains the verified artist profile. Null release URLs leave artwork unlinked and use the artist-profile fallback for the text link.
 - Replace the null biography with approved copy. Newlines are preserved.
 - Set the verified professional email and add verified social objects to `socials`.
 - Add more platforms only after verification.
@@ -49,3 +49,13 @@ Once connected to Vercel, future merges to the configured production branch can 
 Vercel reference: https://vercel.com/docs/domains/working-with-domains/deploying-and-redirecting
 
 The release grid uses three columns above 900px, two from 601–900px, and one at 600px and below. All covers remain original, uncropped and unobscured.
+
+## Verified release destinations
+
+Located through the verified Apple Music artist profile and checked on November 1, 2026. All returned HTTP 200 and identify Phenix Rhyder as artist:
+
+- October — Album: https://music.apple.com/us/album/october/1844034019
+- Rich and Famous — Single: https://music.apple.com/us/album/rich-and-famous-single/6828209227
+- Lost in Ohio — Single: https://music.apple.com/us/album/lost-in-ohio-single/1833474700
+
+Cover links are native keyboard-accessible anchors with release-specific labels, new-tab announcements, visible focus rings and a desktop hover shadow. The effect adds no image overlay, filter, transform or crop; reduced-motion preferences disable transitions.
