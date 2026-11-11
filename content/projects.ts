@@ -8,3 +8,9 @@ export const prism = {
   media: [] as { src: string; alt: string; caption: string }[],
   updates: [] as { title: string; body: string }[],
 };
+
+export const formatr = {
+  title: 'Formatr',
+  description: 'Compose and preview Discord posts with formatting and timestamp tools, then copy the message syntax.',
+  liveUrl: 'https://phenixrhyder.github.io/formatr/',
+};
